@@ -12,9 +12,9 @@ certManager:
   namespace: cert-manager
   serviceAccountName: cert-manager
 
-image:
-  repository: identitry/cert-manager-webhook-loopia
-  tag: 1.1
+image:  
+  repository: ghcr.io/torkelen/cert-manager-webhook-loopia
+  tag: v0.0.1
   pullPolicy: IfNotPresent
 
 nameOverride: ""

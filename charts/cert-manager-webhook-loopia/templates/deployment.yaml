@@ -27,23 +27,28 @@ spec:
           args:
             - --tls-cert-file=/tls/tls.crt
             - --tls-private-key-file=/tls/tls.key
+            - '--secure-port=10250'
+            - '--v=2'
           env:
             - name: GROUP_NAME
               value: {{ .Values.groupName | quote }}
           ports:
             - name: https
-              containerPort: 443
+              containerPort: 10250
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              scheme: HTTPS
-              path: /healthz
-              port: https
-          readinessProbe:
-            httpGet:
-              scheme: HTTPS
-              path: /healthz
-              port: https
+            - name: healthcheck
+              containerPort: 6080
+              protocol: TCP
+          #livenessProbe:
+            #httpGet:
+              #scheme: HTTP
+              #path: /livez
+              #port: 6080
+          #readinessProbe:
+            #httpGet:
+              #scheme: HTTP
+              #path: /healthz
+              #port: 6080
           volumeMounts:
             - name: certs
               mountPath: /tls
